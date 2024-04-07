@@ -4,11 +4,13 @@ import fr.uga.l3miage.spring.tp3.enums.TestCenterCode;
 import fr.uga.l3miage.spring.tp3.models.CandidateEntity;
 import fr.uga.l3miage.spring.tp3.models.CandidateEvaluationGridEntity;
 import fr.uga.l3miage.spring.tp3.models.TestCenterEntity;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,6 +26,14 @@ public class CandidateRepositoryTest {
 
     @Autowired
     private CandidateEvaluationGridRepository candidateEvaluationGridRepository ;
+
+    @BeforeEach
+    @Transactional
+    public void cleanBDsetUp() {
+        candidateRepository.deleteAll();
+        testCenterRepository.deleteAll();
+        candidateEvaluationGridRepository.deleteAll();
+    }
 
     @Test
     public void testFindAllByTestCenterEntityCode() {
@@ -117,6 +127,8 @@ public class CandidateRepositoryTest {
         assertThat(reponse).hasSize(1);
         assertThat(reponse.stream().findFirst().get().getBirthDate()).isEqualTo(LocalDate.of(1993, 3, 3));
 
+
+
     }
 
     @Test
@@ -144,7 +156,6 @@ public class CandidateRepositoryTest {
                 .build();
 
         candidateRepository.saveAll(List.of(candidate1, candidate2, candidate3));
-
 
 
         //When
