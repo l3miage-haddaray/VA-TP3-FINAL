@@ -7,6 +7,8 @@ import fr.uga.l3miage.spring.tp3.models.CandidateEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+
 @Service
 @RequiredArgsConstructor
 public class CandidateService {
@@ -20,5 +22,9 @@ public class CandidateService {
         } catch (CandidateNotFoundException e) {
             throw new CandidateNotFoundRestException(e.getMessage(),e.getCandidateId());
         }
+    }
+
+    public void addCandidates(HashSet candidateEntities) {
+        candidateComponent.addCandidates(candidateEntities);
     }
 }

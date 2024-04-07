@@ -3,6 +3,7 @@ package fr.uga.l3miage.spring.tp3.services;
 import fr.uga.l3miage.spring.tp3.components.ExamComponent;
 import fr.uga.l3miage.spring.tp3.components.SessionComponent;
 import fr.uga.l3miage.spring.tp3.enums.SessionStatus;
+import fr.uga.l3miage.spring.tp3.exceptions.rest.ChangeSessionRestException;
 import fr.uga.l3miage.spring.tp3.exceptions.rest.CreationSessionRestException;
 import fr.uga.l3miage.spring.tp3.exceptions.technical.ExamNotFoundException;
 import fr.uga.l3miage.spring.tp3.mappers.SessionMapper;
@@ -46,6 +47,16 @@ public class SessionService {
             return sessionMapper.toResponse(sessionComponent.createSession(ecosSessionEntity));
         }catch (RuntimeException | ExamNotFoundException e){
             throw new CreationSessionRestException(e.getMessage());
+        }
+    }
+
+    public SessionResponse changeSessionStateToEvalEnded(Long sessionId)  {
+        try {
+            EcosSessionEntity ecosSessionEntity = sessionComponent.changeSessionStateToEvalEnded(sessionId);
+            return sessionMapper.toResponse(ecosSessionEntity);
+        }catch (RuntimeException e){
+            String requestUri = "/api/sessions/" + sessionId + "/status";
+            throw new ChangeSessionRestException(e.getMessage(), requestUri, null);
         }
     }
 }
