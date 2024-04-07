@@ -26,4 +26,15 @@ public interface CandidateEndpoints {
     Double getCandidateAverage(@PathVariable Long candidateId);
 
 
-   }
+    @Operation(description = "Ajouter une collection d'étudiants à un centre de test")
+    @ApiResponse(responseCode = "202", description = "Les étudiants ont été ajoutés avec succès")
+    @ApiResponse(responseCode = "404", description = "Le centre de test ou l'étudiant n'a pas été trouvé", content = @Content(schema = @Schema(implementation =  CandidatNotFoundResponse.class), mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ApiResponse(responseCode = "400", description = "Requête incorrecte, vérification métier non passée", content = @Content(schema = @Schema(implementation = String.class), mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PostMapping("/{centerId}/add-students")
+    Boolean addStudentsToTestCenter(@PathVariable(name="centerId") Long centerId, @RequestBody Set<Long> studentIds);
+
+
+
+
+}
