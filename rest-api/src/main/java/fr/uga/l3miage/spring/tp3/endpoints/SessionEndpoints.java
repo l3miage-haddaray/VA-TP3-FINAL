@@ -28,6 +28,6 @@ public interface SessionEndpoints {
     @ApiResponse(responseCode = "200",description = "Le changement de status de la session a bien été crée")
     @ApiResponse(responseCode = "409" ,description = "Le changement de status de la session a échoué", content = @Content(schema = @Schema(implementation = String.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/{idSession}/status")
+    @PostMapping("/{idSession}/change-state-to-end")
     SessionResponse changeSessionStateToEvalEnded(@PathVariable(name = "idSession") Long sessionId);
 }
