@@ -23,5 +23,6 @@ public interface CandidateEndpoints {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{candidateId}/average")
     Double getCandidateAverage(@PathVariable Long candidateId);
+    
 
    }

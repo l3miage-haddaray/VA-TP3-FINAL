@@ -31,5 +31,4 @@ public interface SessionEndpoints {
     @PostMapping("/{idSession}/change-state-to-end")
     SessionResponse changeSessionStateToEvalEnded(@PathVariable(name = "idSession") Long sessionId);
 
-
 }
