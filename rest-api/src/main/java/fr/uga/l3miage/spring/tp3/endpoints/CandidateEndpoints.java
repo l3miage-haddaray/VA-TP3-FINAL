@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @Tag(name = "Gestion des candidat")
 @RestController
@@ -22,4 +23,5 @@ public interface CandidateEndpoints {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{candidateId}/average")
     Double getCandidateAverage(@PathVariable Long candidateId);
-}
+
+   }
