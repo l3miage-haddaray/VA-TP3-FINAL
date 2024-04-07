@@ -24,5 +24,10 @@ public interface SessionEndpoints {
     SessionResponse createSession(@RequestBody SessionCreationRequest request);
 
 
-
+    @Operation(description = "Changer l'état d'une session de EVAL_STARTED à EVAL_ENDED")
+    @ApiResponse(responseCode = "200",description = "Le changement de status de la session a bien été crée")
+    @ApiResponse(responseCode = "409" ,description = "Le changement de status de la session a échoué", content = @Content(schema = @Schema(implementation = String.class),mediaType = MediaType.APPLICATION_JSON_VALUE))
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{idSession}/status")
+    SessionResponse changeSessionStateToEvalEnded(@PathVariable(name = "idSession") Long sessionId);
 }
