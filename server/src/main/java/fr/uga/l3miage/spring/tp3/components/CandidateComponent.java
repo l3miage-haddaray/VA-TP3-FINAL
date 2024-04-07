@@ -8,6 +8,8 @@ import fr.uga.l3miage.spring.tp3.repositories.CandidateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,4 +31,16 @@ public class CandidateComponent {
        return candidateRepository.findById(id).orElseThrow(()-> new CandidateNotFoundException(String.format("Le candidat [%s] n'a pas été trouvé",id),id));
     }
 
+    public void addCandidates(HashSet<CandidateEntity> candidates) {
+
+        LocalDate currentDate = LocalDate.now();
+
+        for (CandidateEntity candidate : candidates) {
+            LocalDate birthDate = candidate.getBirthDate();
+            if (birthDate.plusYears(18).isAfter(currentDate)) {
+                throw new IllegalArgumentException("L'âge d'un candidat est inférieur à 18 ans.");
+            }
+        }
+        candidateRepository.saveAll(candidates);
+    }
 }
