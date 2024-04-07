@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -42,8 +43,8 @@ public class  ExamComponentTest {
                 .id(7L)
                 .weight(1)
                 .name("exam")
-                .endDate(null)
                 .startDate(null)
+                .endDate(null)
                 .build();
 
         //when
