@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 @AutoConfigureTestDatabase
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 
-public class ExamComponentTest {
+public class  ExamComponentTest {
     @Autowired
     private ExamComponent examComponent;
 
@@ -42,6 +42,8 @@ public class ExamComponentTest {
                 .id(7L)
                 .weight(1)
                 .name("exam")
+                .endDate(null)
+                .startDate(null)
                 .build();
 
         //when
