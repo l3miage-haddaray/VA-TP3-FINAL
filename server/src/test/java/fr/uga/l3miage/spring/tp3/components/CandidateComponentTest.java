@@ -37,10 +37,10 @@ public class CandidateComponentTest {
         when(candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(anyDouble())).thenReturn(new HashSet<>());
 
         //when
-        Set<CandidateEntity> response = candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(4.0);
+        Set<CandidateEntity> reponse = candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(4.0);
 
         //then
-        assertThat(response).isEmpty();
+        assertThat(reponse).isEmpty();
     }
     @Test
     void getAllEliminatedCandidateIsNotEmpty() {
@@ -53,10 +53,10 @@ public class CandidateComponentTest {
                 .build();
 
 
-        Set<CandidateEntity> candidate1Set = Set.of(candidate1);
+        Set<CandidateEntity> Setcandidate1 = Set.of(candidate1);
 
         //when
-        when(candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(anyDouble())).thenReturn(candidate1Set);
+        when(candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(anyDouble())).thenReturn(Setcandidate1);
         Set<CandidateEntity> response = candidateRepository.findAllByCandidateEvaluationGridEntitiesGradeLessThan(5.0);
 
         //then
@@ -86,10 +86,6 @@ public class CandidateComponentTest {
 
         //Then
         assertDoesNotThrow(()->candidateComponent.getCandidatById(anyLong()));
-
     }
-
-
-
 
 }
